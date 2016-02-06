@@ -151,5 +151,7 @@ class Comodo
 			return $this->OK;
 		}
 	}
+	public function pagination(){}
+	public function table_advance(){}
 }
 ?>
