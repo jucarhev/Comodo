@@ -12,6 +12,9 @@ class Comodo
 	var $value='';
 	var $key='';
 
+	var $OK="OK";
+	var $ERROR="ERROR";
+
 	function __construct($host, $user, $pass, $db, $port='', $socket=''){
 		if (!extension_loaded('mysqli'))trigger_error('Error: mysqli extension is not loaded', E_USER_ERROR);
 		$this->credencial = array(
@@ -84,8 +87,8 @@ class Comodo
 			return $this->OK;
 		}
 	}
-	public function read($table){
-		$table_datos="<table><tr>";
+	public function read($table, $param=''){
+		$table_datos="<table ".$param."><tr>";
 		$this->connect();
 		$query = "SELECT * from ".$table;
 		$resultado=$this->conn->query($query);
@@ -134,14 +137,12 @@ class Comodo
 		$table_datos.="</tr>";
 		$table_datos.="</table>";
 		return $table_datos;
-		$this->cerrarConexion();
 	}
 	public function count($sql){
 		$this->connect();
 		$res=$this->conn->query($sql);
 		$total=$res->num_rows;
 		return $total;
-		$this->close();
 	}
 	public function truncate($table){
 		$sql = "TRUNCATE TABLE  ".$table;
@@ -151,7 +152,39 @@ class Comodo
 			return $this->OK;
 		}
 	}
+	public function get_row($table, $id){}
 	public function pagination(){}
-	public function table_advance(){}
+	public function table_advance($table,$data=array(),$where='',$limit='',$option=''){
+		$this->connect();
+		$sql="";
+		$tabla="<table><tr>";
+		#$total = $this->count("SELECT * from ".$table);
+		$num=count($data);
+		for ($i=0; $i < $num; $i++) { 
+			$tabla.="<td>".$data[$i]."</td>";
+		}
+		$tabla.="</tr>";
+		foreach ($data as $value) {
+			$sql.=",".$value;
+		}
+		$sql = substr($sql, 1, strlen($sql));
+		$sql = "SELECT ".$sql." FROM ".$table.";";
+
+		$sentencia=$this->conn->query($sql);
+		$total=$sentencia->num_rows;
+
+		while ($fila=$sentencia->fetch_array()) {
+			$tabla.="<tr>";
+			for ($i=0; $i < $num; $i++) { 
+				$tabla.="<td>".$fila[$i]."</td>";
+			}
+				$tabla.="</tr>";
+		}
+		
+		$tabla.="</tr>"; 
+		$tabla.="</table>";
+		return $tabla.$sql;
+	}
+	public function rediret(){}
 }
 ?>
