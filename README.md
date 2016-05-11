@@ -44,4 +44,25 @@ $where = "id=1";
 echo $obj->update($table,$data,$where);
 //Esto retornara un Ok o un Error
 ```
+## Mostrar registros
+A traves de la funcion read se pueden ver los registros de la siguiente manera
 
+```php
+$table="Nombre_de_la_tabla";
+//Opcional, son para agrgar estilos a la tabla, como clases o propiedades
+$param="border=1 cellspacing=1";
+echo $obj->read($table, $param='');
+//devuelve una tabla html con los datos
+```
+
+## Truncate
+La clase truncate permite vaciar una tabla de la base de datos
+```php
+echo $obj->read('Nombre_tabla');
+```
+
+## Count
+Cuenta los registro a traves de una sentencia sql
+```php
+echo $obj->count('SELECT * FROM tabla WHERE precio>10');
+```
