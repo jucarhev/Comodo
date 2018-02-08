@@ -45,14 +45,23 @@ echo $obj->update($table,$data,$where);
 //Esto retornara un Ok o un Error
 ```
 ## Mostrar registros
-A traves de la funcion read se pueden ver los registros de la siguiente manera
+A traves de la funcion table se pueden ver los registros en forma de tabla
 
 ```php
 $table="Nombre_de_la_tabla";
 //Opcional, son para agrgar estilos a la tabla, como clases o propiedades
 $param="border=1 cellspacing=1";
-echo $obj->read($table, $param='');
+echo $obj->table($table, $param='');
 //devuelve una tabla html con los datos
+```
+
+la funcion read regresa un array con los datos de la consulta hecha.  
+```php
+$datos = $obj->read($sql);
+//devuelve un array con los datos
+foreach ($datos as $row):
+	echo $row['id'];
+endforeach;
 ```
 
 ## Truncate
