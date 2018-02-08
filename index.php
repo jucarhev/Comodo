@@ -16,9 +16,9 @@
 
 	<?php 
 		include "comodo/comodo.php";
-		$obj = new Comodo("localhost","root","root","test");
-		$data = array('nombre','apellido','edad');
-		echo $obj->table_advance("usuarios", $data);
+		$obj = new Comodo("localhost","root","lenov35","test");
+		$data = array('id','test');
+		echo $obj->table_advance("test", $data);
 	?>
 </body>
 </html>

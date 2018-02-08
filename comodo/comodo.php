@@ -26,6 +26,7 @@ class Comodo
 			$socket == ''? ini_get('mysqli.default_socket') : $socket,
 		);
 	}
+	
 	public function connect(){
 		$this->conn = new mysqli(
 			$this->credencial[0],
