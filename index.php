@@ -15,10 +15,10 @@
 	</form>
 
 	<?php 
-		include "comodo/comodo.php";
+		include "Comodo.php";
 		$obj = new Comodo("localhost","root","lenov35","test");
 		$data = array('id','test');
-		echo $obj->table_advance("test", $data);
+		echo $obj->read("test", "border='1'");
 	?>
 </body>
 </html>
